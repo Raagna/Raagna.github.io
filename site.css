@@ -1,0 +1,419 @@
+@font-face {
+	font-family: "Archivo";
+	src: url("fonts/archivo-latin.woff2") format("woff2");
+	font-weight: 100 900;
+	font-stretch: 62% 125%;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Noto Serif Tibetan";
+	src: url("fonts/noto-serif-tibetan.woff2") format("woff2");
+	font-weight: 500;
+	font-display: swap;
+	unicode-range: U+0F00-0FFF;
+}
+
+:root {
+	--sun: #f6c915;
+	--ink: #16140f;
+	--white: #ffffff;
+	--strip: clamp(44px, 6.4vh, 58px);
+	--gutter: clamp(16px, 4vw, 64px);
+	--size: min(calc(100svh - 5 * var(--strip) - var(--gutter)), 50vw);
+	--ease: cubic-bezier(0.16, 1, 0.3, 1);
+	scrollbar-color: var(--ink) transparent;
+}
+
+/* One colour per project, and a second colour for the wall it sits on,
+   so a sleeve always clashes with its ground the way it does on the yellow. */
+[data-sleeve="game-night"] { --sleeve: #e8431a; --on-sleeve: var(--ink); }
+[data-sleeve="ledger"] { --sleeve: #0b6b4d; --on-sleeve: var(--white); }
+[data-sleeve="tibetan"] { --sleeve: #2235c8; --on-sleeve: var(--white); }
+[data-sleeve="beygarage"] { --sleeve: #f39bc1; --on-sleeve: var(--ink); }
+[data-sleeve="job-dashboard"] { --sleeve: #62c3ee; --on-sleeve: var(--ink); }
+[data-sleeve="mobile-game"] { --sleeve: #1a1916; --on-sleeve: var(--white); }
+
+[data-wall="shop"] { --wall: var(--sun); --on-wall: var(--ink); }
+[data-wall="game-night"] { --wall: #0f5c6e; --on-wall: var(--white); }
+[data-wall="ledger"] { --wall: #f7a01e; --on-wall: var(--ink); }
+[data-wall="tibetan"] { --wall: #d8ee3c; --on-wall: var(--ink); }
+[data-wall="beygarage"] { --wall: #3b1a8f; --on-wall: var(--white); }
+[data-wall="job-dashboard"] { --wall: #c21f3a; --on-wall: var(--white); }
+[data-wall="mobile-game"] { --wall: #19b37a; --on-wall: var(--ink); }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+	margin: 0;
+	background: var(--sun);
+	color: var(--ink);
+	font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+	font-size: 1.0625rem;
+	line-height: 1.55;
+	font-variant-numeric: tabular-nums;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+h1, h2, h3 {
+	margin: 0;
+	font-stretch: 125%;
+	font-weight: 800;
+	line-height: 1.02;
+	letter-spacing: -0.02em;
+	text-wrap: balance;
+}
+
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 2px; }
+a:hover { text-decoration-thickness: 4px; }
+
+:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+::selection { background: var(--ink); color: var(--sun); }
+
+.skip {
+	position: absolute;
+	left: var(--gutter);
+	top: -100px;
+	z-index: 30;
+	padding: 10px 16px;
+	background: var(--ink);
+	color: var(--white);
+}
+.skip:focus { top: 12px; }
+
+/* The shop: name on the left, crate on the right, filling the first screen */
+.shop {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) var(--size);
+	gap: var(--gutter);
+	align-items: start;
+	min-height: 100svh;
+	padding: var(--gutter) var(--gutter) 0;
+	overflow: clip;
+	background: var(--wall);
+	color: var(--on-wall);
+	transition: background-color 0.5s var(--ease), color 0.3s linear;
+}
+
+.intro { align-self: center; padding-bottom: var(--gutter); }
+
+h1 { font-size: clamp(3.25rem, 7.4vw, 6rem); font-weight: 900; }
+
+.pitch {
+	max-width: 30ch;
+	margin: 1.2em 0 0;
+	font-size: clamp(1.25rem, 1.9vw, 1.6rem);
+	line-height: 1.28;
+	font-weight: 500;
+}
+
+.facts { max-width: 46ch; margin: 1em 0 0; }
+
+.contact-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 24px;
+	margin-top: 1.4em;
+	font-weight: 700;
+}
+.contact-links a { display: inline-block; padding: 6px 0; }
+
+.hint { display: none; margin: 2.4em 0 0; font-size: 0.9375rem; }
+@media (hover: hover) { .hint { display: block; } }
+
+/* One shadow for the whole stack. Filtering the parent keeps it outside the
+   crate's clip, and six separate shadows would muddy the wall behind. */
+.shop nav { filter: drop-shadow(0 10px 22px rgb(22 20 15 / 0.3)); }
+
+/* The crate. Every sleeve is the same square; only its top strip shows until
+   the sleeves in front of it have dropped. Dropping by size minus one strip
+   leaves that strip showing below, so the stack never changes height. */
+.crate {
+	position: relative;
+	width: var(--size);
+	height: calc(var(--size) + 5 * var(--strip));
+	clip-path: inset(-60px -60px 0 -60px);
+}
+
+.crate li {
+	position: absolute;
+	inset: calc((5 - var(--i)) * var(--strip)) 0 auto 0;
+	z-index: calc(10 - var(--i));
+	transition: transform 0.6s var(--ease);
+}
+
+.crate li.is-down { transform: translateY(calc(var(--size) - var(--strip))); }
+
+.sleeve {
+	position: relative;
+	display: block;
+	aspect-ratio: 1;
+	overflow: hidden;
+	background: var(--sleeve);
+	color: var(--on-sleeve);
+	text-decoration: none;
+}
+
+.crate .sleeve:focus-visible { outline-offset: -6px; }
+
+.strip {
+	position: absolute;
+	inset: 0 0 auto;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	height: var(--strip);
+	padding: 0 6%;
+}
+
+.title {
+	overflow: hidden;
+	font-size: clamp(1rem, 1.5vw, 1.25rem);
+	font-stretch: 125%;
+	font-weight: 800;
+	letter-spacing: -0.01em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.status {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45em;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+/* The dot means one thing: a reader can open this now. */
+.dot {
+	width: 0.62em;
+	height: 0.62em;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.art { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.hook {
+	position: absolute;
+	inset: auto 0 0;
+	padding: 0 6% 5.5%;
+	font-size: calc(var(--size) * var(--hook, 0.072));
+	font-stretch: 125%;
+	font-weight: 800;
+	line-height: 1.04;
+	letter-spacing: -0.02em;
+	text-wrap: balance;
+}
+
+/* Each sleeve sets its line at its own scale, the shorter the larger */
+[data-sleeve="ledger"] { --hook: 0.112; }
+[data-sleeve="tibetan"] { --hook: 0.088; }
+[data-sleeve="mobile-game"] { --hook: 0.062; }
+
+[lang="bo"] {
+	font-family: "Noto Serif Tibetan", "Microsoft Himalaya", serif;
+	font-size: 1.25em;
+	font-stretch: 100%;
+	font-weight: 500;
+	line-height: 1.5;
+	letter-spacing: 0;
+}
+
+/* A project on its own wall. Billing follows weight: the live projects get the
+   room, work that can't be opened yet gets less, and the old one gets least. */
+.spread {
+	--sleeve-size: min(calc(50vw - var(--gutter) * 1.5), 680px);
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: clamp(32px, 6vw, 96px);
+	align-items: start;
+	padding: clamp(56px, 9vw, 128px) var(--gutter);
+	background: var(--wall);
+	color: var(--on-wall);
+}
+
+.sleeve-large {
+	--size: var(--sleeve-size);
+	position: sticky;
+	top: var(--gutter);
+	width: var(--sleeve-size);
+	box-shadow: 0 18px 40px -12px rgb(22 20 15 / 0.45);
+}
+
+.lead .sleeve-large { justify-self: end; }
+
+/* The lead project's sleeve is right above in the crate, so it opens on the game */
+.opener {
+	grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	padding-top: clamp(48px, 6vw, 88px);
+}
+.opener .notes h2 { font-size: clamp(2.75rem, 6.4vw, 6rem); }
+.on-screen { position: sticky; top: var(--gutter); margin: 0; }
+
+.mid {
+	--sleeve-size: min(34vw, 460px);
+	grid-template-columns: minmax(0, 1fr) var(--sleeve-size);
+}
+.mid .sleeve-large { order: 2; }
+.mid .notes { justify-self: end; }
+
+.minor {
+	--sleeve-size: 260px;
+	grid-template-columns: var(--sleeve-size) minmax(0, 1fr);
+	padding-block: clamp(40px, 5vw, 72px);
+}
+.minor .lede { font-size: 1.0625rem; }
+
+.notes { max-width: 40rem; }
+
+.notes h2 { font-size: clamp(2.25rem, 4.6vw, 4rem); }
+.mid .notes h2 { font-size: clamp(2rem, 3.8vw, 3.25rem); }
+.minor .notes h2 { font-size: clamp(1.75rem, 2.8vw, 2.5rem); }
+
+.notes > .status { display: flex; margin: 0.9em 0 0; font-size: 1rem; }
+
+.lede {
+	max-width: 34em;
+	margin: 1em 0 0;
+	font-size: clamp(1.1875rem, 1.6vw, 1.375rem);
+	line-height: 1.4;
+	font-weight: 500;
+}
+
+figure { margin: 2em 0 0; }
+figure img { width: 100%; box-shadow: 0 10px 28px -10px rgb(22 20 15 / 0.5); }
+figcaption { margin-top: 0.7em; font-size: 0.9375rem; }
+
+/* Set like the credits on the back of a sleeve */
+dl {
+	display: grid;
+	grid-template-columns: minmax(7.5em, 11em) minmax(0, 1fr);
+	gap: 0.9em 1.5em;
+	margin: 2em 0 0;
+}
+dt { font-weight: 800; line-height: 1.3; padding-top: 0.1em; }
+dd { max-width: 62ch; margin: 0; }
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 12px 28px;
+	margin-top: 2em;
+	font-weight: 700;
+}
+
+.button {
+	display: inline-block;
+	padding: 14px 22px;
+	background: var(--on-wall);
+	color: var(--wall);
+	text-decoration: none;
+	transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.button:focus-visible { outline-color: var(--on-wall); }
+.button:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 18px -8px rgb(22 20 15 / 0.55);
+}
+
+.closed { max-width: 62ch; margin: 2em 0 0; font-weight: 600; }
+
+.plate { max-width: 62ch; margin: 2.4em 0 0; font-size: 0.9375rem; }
+
+/* Experience and the close */
+.experience {
+	padding: clamp(56px, 9vw, 128px) var(--gutter);
+	background: var(--sun);
+}
+
+.experience h2 { font-size: clamp(2.25rem, 4.6vw, 4rem); }
+
+.roles {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 40px clamp(32px, 6vw, 96px);
+	margin-top: 2.2em;
+}
+
+.roles h3 { font-size: 1.25rem; font-stretch: 112%; line-height: 1.3; letter-spacing: -0.01em; }
+.roles p { max-width: 58ch; margin: 0.35em 0 0; }
+.roles .when { font-weight: 600; }
+
+.stack { max-width: 58ch; margin: 3em 0 0; font-weight: 600; }
+
+.close {
+	padding: clamp(56px, 9vw, 128px) var(--gutter) 48px;
+	background: var(--ink);
+	color: var(--white);
+}
+
+.close h2 { max-width: 16em; font-size: clamp(1.75rem, 3.4vw, 3rem); }
+
+.mail {
+	display: inline-block;
+	margin-top: 0.5em;
+	color: var(--sun);
+	font-size: clamp(1.375rem, 5.2vw, 4.5rem);
+	font-stretch: 125%;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+	line-height: 1.1;
+	overflow-wrap: anywhere;
+}
+
+.close .contact-links { margin-top: 2em; }
+.colophon { max-width: 62ch; margin: 3em 0 0; font-size: 0.9375rem; }
+.close ::selection { background: var(--sun); color: var(--ink); }
+
+/* Tablets and phones: the crate goes under the name, and the page is one column */
+@media (max-width: 859px) {
+	:root {
+		--size: calc(100vw - 2 * var(--gutter));
+		--strip: 48px;
+	}
+
+	.shop { grid-template-columns: minmax(0, 1fr); gap: 32px; min-height: 0; }
+	.intro { padding-bottom: 0; }
+
+	.spread,
+	.opener,
+	.mid,
+	.minor { grid-template-columns: minmax(0, 1fr); }
+
+	.spread { --sleeve-size: calc(100vw - 2 * var(--gutter)); }
+	.mid { --sleeve-size: calc((100vw - 2 * var(--gutter)) * 0.72); }
+	.minor { --sleeve-size: calc((100vw - 2 * var(--gutter)) * 0.5); }
+
+	.sleeve-large,
+	.on-screen { position: relative; top: 0; }
+	.mid .sleeve-large { order: 0; }
+	.on-screen { order: -1; }
+
+	/* Too small to read at this size, and the crate above already shows it */
+	.minor .hook { display: none; }
+	.mid .notes { justify-self: start; }
+	dl { grid-template-columns: minmax(0, 1fr); gap: 0.15em; }
+	dd { margin-bottom: 0.9em; }
+	.roles { grid-template-columns: minmax(0, 1fr); }
+	.status { font-size: 0.875rem; }
+}
+
+/* The narrowest phones need the title at normal width to fit beside its status */
+@media (max-width: 400px) {
+	.title { font-stretch: 100%; }
+	.strip { gap: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	.shop, .crate li, .button { transition: none; }
+}
