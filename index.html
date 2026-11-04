@@ -5,264 +5,225 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Rabten Tsering, software developer</title>
 	<meta name="description" content="Rabten Tsering builds software people can open and use, including party games played on phones and a budget app, and is working on a translator and voice for Tibetan.">
-	<meta name="theme-color" content="#f6c915">
+	<meta name="theme-color" content="#ffffff">
 	<link rel="icon" href="favicon.svg" type="image/svg+xml">
-	<link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="fonts/public-sans-400.woff2" as="font" type="font/woff2" crossorigin>
 	<link rel="stylesheet" href="site.css">
 </head>
 <body>
-	<a class="skip" href="#game-night">Skip to the projects</a>
+	<a href="#projects" class="skip">Skip to the projects</a>
 
-	<header class="shop" id="top" data-wall="shop">
-		<div class="intro">
-			<h1>Rabten<br>Tsering</h1>
-			<p class="pitch">I build software people can open and use, like party games played on phones and a budget app. I'm also working on a translator and voice for Tibetan.</p>
-			<p class="facts">Computer Science, AI stream, Carleton University, 2025. Ontario, Canada.</p>
-			<ul class="contact-links">
-				<li><a href="https://github.com/Raagna">GitHub</a></li>
-				<li><a href="https://www.linkedin.com/in/rabten-tsering/">LinkedIn</a></li>
-				<li><a href="mailto:rabten.tt@gmail.com">Email</a></li>
-			</ul>
-			<p class="hint">Move across the sleeves to flip through them. Click one to open it.</p>
-		</div>
-
-		<nav aria-label="Projects">
-			<ol class="crate">
-				<li style="--i:0">
-					<a class="sleeve" data-sleeve="game-night" href="#game-night">
-						<span class="strip"><span class="title">Game Night</span><span class="status"><span class="dot"></span>Live</span></span>
-						<img class="art" src="covers/game-night.svg" alt="" width="1000" height="1000">
-						<span class="hook">Eight party games. One TV. Everyone's phones.</span>
-					</a>
-				</li>
-				<li style="--i:1">
-					<a class="sleeve" data-sleeve="ledger" href="#ledger">
-						<span class="strip"><span class="title">Ledger</span><span class="status"><span class="dot"></span>Live</span></span>
-						<img class="art" src="covers/ledger.svg" alt="" width="1000" height="1000">
-						<span class="hook">Am I OK to spend this?</span>
-					</a>
-				</li>
-				<li style="--i:2">
-					<a class="sleeve" data-sleeve="tibetan" href="#tibetan">
-						<span class="strip"><span class="title">Tibetan Translate</span><span class="status">In progress</span></span>
-						<img class="art" src="covers/tibetan.svg" alt="" width="1000" height="1000">
-						<span class="hook"><span lang="bo">བཀྲ་ཤིས་བདེ་ལེགས</span></span>
-					</a>
-				</li>
-				<li style="--i:3">
-					<a class="sleeve" data-sleeve="beygarage" href="#beygarage">
-						<span class="strip"><span class="title">BeyGarage</span><span class="status">Not public yet</span></span>
-						<img class="art" src="covers/beygarage.svg" alt="" width="1000" height="1000">
-						<span class="hook">Every part. Every combo, scored against the meta.</span>
-					</a>
-				</li>
-				<li style="--i:4">
-					<a class="sleeve" data-sleeve="job-dashboard" href="#job-dashboard">
-						<span class="strip"><span class="title">Job Dashboard</span><span class="status">Runs on my PC</span></span>
-						<img class="art" src="covers/job-dashboard.svg" alt="" width="1000" height="1000">
-						<span class="hook">Job postings, ranked against my resume.</span>
-					</a>
-				</li>
-				<li style="--i:5">
-					<a class="sleeve" data-sleeve="mobile-game" href="#mobile-game">
-						<span class="strip"><span class="title">Mobile Game</span><span class="status">Source only</span></span>
-						<img class="art" src="covers/mobile-game.svg" alt="" width="1000" height="1000">
-						<span class="hook">A solo game, from React Native to Spring Boot.</span>
-					</a>
-				</li>
-			</ol>
+	<header class="top">
+		<a href="#intro" class="name">Rabten Tsering</a>
+		<nav aria-label="Main">
+			<a href="#projects">Projects</a>
+			<a href="#experience">Experience</a>
+			<a href="https://github.com/Raagna">GitHub</a>
+			<a href="https://www.linkedin.com/in/rabten-tsering/">LinkedIn</a>
+			<a href="mailto:rabten.tt@gmail.com">Email</a>
 		</nav>
 	</header>
 
 	<main>
-		<article class="spread opener" id="game-night" data-wall="game-night">
-			<div class="notes">
-				<h2>Game Night</h2>
-				<p class="status"><span class="dot"></span>Live</p>
-				<p class="lede">One screen everyone can see runs the game, and players join on their own phones with a QR code. There's nothing to install.</p>
-				<ul class="actions">
-					<li><a class="button" href="https://raagna.github.io/game-night/">Open Game Night</a></li>
-					<li><a href="https://github.com/Raagna/game-night">Source on GitHub</a></li>
-				</ul>
-				<dl>
-					<dt>What's hard about it</dt>
-					<dd>Keeping every phone and the TV in step over Socket.IO. The server owns each game, checks that an action came from the right phone, and counts a double tap once.</dd>
-					<dt>Built with</dt>
-					<dd>React, Vite, Express, Socket.IO</dd>
-					<dt>Tests</dt>
-					<dd>272 automated tests</dd>
-				</dl>
-				<p class="plate" data-commits="game-night">Its sleeve in the crate shows 72 commits, one square each, stacked by the day they were made.</p>
-			</div>
-			<figure class="on-screen">
-				<img src="shots/game-night-tv.jpg" alt="The TV screen during a round of Fib or Fact: six answers on a split-flap board, with Bangkok revealed as the fact." width="916" height="420" loading="lazy">
-				<figcaption>Fib or Fact on the TV, with made-up players.</figcaption>
-			</figure>
-		</article>
+		<section class="intro" id="intro">
+			<h1>I build software people can open and use, like party games played on phones and a budget app. I'm currently working on a translator and voice for Tibetan.</h1>
+			<p class="facts">Computer Science, AI stream, Carleton University, 2025. Ontario, Canada.</p>
+			<p class="buttons">
+				<a href="#projects" class="button main">See my projects</a>
+				<a href="#contact" class="button">Get in touch</a>
+			</p>
+		</section>
 
-		<article class="spread lead" id="ledger" data-wall="ledger">
-			<div class="sleeve sleeve-large" data-sleeve="ledger">
-				<img class="art" src="covers/ledger.svg" alt="" width="1000" height="1000" loading="lazy">
-				<span class="hook">Am I OK to spend this?</span>
-			</div>
-			<div class="notes">
-				<h2>Ledger</h2>
-				<p class="status"><span class="dot"></span>Live</p>
-				<p class="lede">A budget app for one person or a whole household. Its main figure is what's safe to spend this month, with the sum written out so you can check it.</p>
-				<ul class="actions">
-					<li><a class="button" href="https://raagna.github.io/WebBudget/">Open Ledger</a></li>
-					<li><a href="https://github.com/Raagna/WebBudget">Source on GitHub</a></li>
-				</ul>
+		<section class="projects" id="projects">
+			<h2>Projects</h2>
+			<div class="grid">
+			<article class="project" id="game-night">
+				<figure>
+					<img src="shots/game-night-tv.jpg" alt="The TV screen during a round of Fib or Fact: six answers on a split-flap board, with Bangkok revealed as the fact." width="916" height="420" loading="lazy">
+					<figcaption>Fib or Fact on the TV, with made-up players.</figcaption>
+				</figure>
+				<div class="about">
+					<div class="heading">
+						<h3>Game Night</h3>
+						<p class="status live">Live</p>
+					</div>
+					<p>One screen everyone can see runs the game, and players join on their own phones with a QR code. There's nothing to install.</p>
+					<p class="stack">React, Vite, Express, Socket.IO</p>
+					<p class="actions"><a href="https://raagna.github.io/game-night/" class="open">Open Game Night</a> <a href="https://github.com/Raagna/game-night">Source on GitHub</a></p>
+					
+				</div>
+				<details>
+					<summary>More about this project</summary>
+					<dl>
+						<dt>What's hard about it</dt><dd>Keeping every phone and the TV in step over Socket.IO. The server owns each game, checks that an action came from the right phone, and counts a double tap once.</dd>
+						<dt>Tests</dt><dd>272 automated tests</dd>
+					</dl>
+				</details>
+			</article>
+			<article class="project" id="ledger">
 				<figure>
 					<img src="shots/ledger-dashboard.jpg" alt="The Ledger dashboard for a demo account: a large safe-to-spend figure with its working shown as a sum, beside bills due." width="1240" height="650" loading="lazy">
 					<figcaption>The dashboard, on a demo account with made-up money.</figcaption>
 				</figure>
-				<dl>
-					<dt>What's hard about it</dt>
-					<dd>Reading receipts without sending them anywhere. A vision model on my own machine pulls out the amount, date and merchant. That model isn't reachable from the public site, so there you type them in.</dd>
-					<dt>Built with</dt>
-					<dd>React, Express, Postgres, Ollama</dd>
-				</dl>
-				<p class="plate" data-commits="ledger">Cover: 72 commits, one line each in order, longer where more lines changed.</p>
+				<div class="about">
+					<div class="heading">
+						<h3>Ledger</h3>
+						<p class="status live">Live</p>
+					</div>
+					<p>A budget app for one person or a whole household. Its main figure is what's safe to spend this month, with the sum written out so you can check it.</p>
+					<p class="stack">React, Express, Postgres, Ollama</p>
+					<p class="actions"><a href="https://raagna.github.io/WebBudget/" class="open">Open Ledger</a> <a href="https://github.com/Raagna/WebBudget">Source on GitHub</a></p>
+					
+				</div>
+				<details>
+					<summary>More about this project</summary>
+					<dl>
+						<dt>What's hard about it</dt><dd>Reading receipts without sending them anywhere. A vision model on my own machine pulls out the amount, date and merchant. That model isn't reachable from the public site, so there you type them in.</dd>
+					</dl>
+				</details>
+			</article>
+			<article class="project" id="tibetan">
+				<figure>
+					<div class="plot" data-plot="tibetan" aria-hidden="true"><span></span></div>
+					<figcaption>8 commits, one bar each, taller where more lines changed.</figcaption>
+				</figure>
+				<div class="about">
+					<div class="heading">
+						<h3>Tibetan Translate</h3>
+						<p class="status">In progress</p>
+					</div>
+					<p>The goal is to type or speak in English or Tibetan, get a translation, and hear it read aloud. Tibetan has very little training data, so this stage is about measuring open models and fixing what they get wrong.</p>
+					<p class="stack">Python, PyTorch, NLLB-200, MMS</p>
+					
+					<p class="closed">The code is private for now. I'm happy to walk through it.</p>
+				</div>
+				<details>
+					<summary>More about this project</summary>
+					<dl>
+						<dt>Tibetan to English</dt><dd>chrF score up from 48.5 to 58.6</dd>
+						<dt>English to Tibetan</dt><dd>chrF score up from 36.3 to 38.5</dd>
+						<dt>Spoken round trip</dt><dd>Character errors down from 47% to 42%</dd>
+						<dt>How far to trust that</dt><dd>These are early numbers from 48 draft sentences that a fluent speaker hasn't checked yet.</dd>
+					</dl>
+				</details>
+			</article>
+			<article class="project" id="beygarage">
+				<figure>
+					<div class="plot" data-plot="beygarage" aria-hidden="true"><span></span></div>
+					<figcaption>142 commits, one bar each, taller where more lines changed.</figcaption>
+				</figure>
+				<div class="about">
+					<div class="heading">
+						<h3>BeyGarage</h3>
+						<p class="status">Not public yet</p>
+					</div>
+					<p>A companion site for Beyblade X players. Look up any part, build a combo and see how it scores against recent tournament results, then track what you own.</p>
+					<p class="stack">React, Vite, Express, Postgres, Ollama</p>
+					
+					<p class="closed">The code is private for now. I'm happy to walk through it. Fan-made, and not affiliated with Takara Tomy or Hasbro.</p>
+				</div>
+				<details>
+					<summary>More about this project</summary>
+					<dl>
+						<dt>What's hard about it</dt><dd>Turning scattered sources into one set of data: a parts wiki, official product pages, event schedules and store stock, all refreshed on a schedule.</dd>
+						<dt>Tests</dt><dd>Over 100 automated tests</dd>
+					</dl>
+				</details>
+			</article>
+			<article class="project" id="job-dashboard">
+				<figure>
+					<div class="plot" data-plot="job-dashboard" aria-hidden="true"><span></span></div>
+					<figcaption>54 commits, one bar each, taller where more lines changed.</figcaption>
+				</figure>
+				<div class="about">
+					<div class="heading">
+						<h3>Job Dashboard</h3>
+						<p class="status">Runs on my PC</p>
+					</div>
+					<p>It pulls postings from public job feeds, removes duplicates, and scores each one against my resume with the reasons shown. A browser extension fills in forms for me to review, and I submit every application myself.</p>
+					<p class="stack">React, Vite, Node, Postgres, a browser extension</p>
+					<p class="actions"><a href="https://raagna.github.io/jobdashboard-site/">About this project</a></p>
+					
+				</div>
+				<details>
+					<summary>More about this project</summary>
+					<dl>
+						<dt>What's hard about it</dt><dd>Making four different feeds look like one kind of job, then keeping a score honest enough to act on.</dd>
+						<dt>Tests</dt><dd>Over 240 automated tests</dd>
+					</dl>
+				</details>
+			</article>
+			<article class="project" id="mobile-game">
+				<figure>
+					<div class="plot" data-plot="mobile-game" aria-hidden="true"><span></span></div>
+					<figcaption>26 commits, one bar each, taller where more lines changed.</figcaption>
+				</figure>
+				<div class="about">
+					<div class="heading">
+						<h3>Mobile Game</h3>
+						<p class="status">Source only</p>
+					</div>
+					<p>A solo project from 2025 to practise building a mobile app from end to end, with a React Native front end and a Spring Boot back end. It isn't hosted anywhere, so the source is the way to see it.</p>
+					<p class="stack">React Native, Expo, Reanimated, Spring Boot</p>
+					<p class="actions"><a href="https://github.com/Raagna/MobileGame">Source on GitHub</a></p>
+					
+				</div>
+				
+			</article>
 			</div>
-		</article>
-
-		<article class="spread mid" id="tibetan" data-wall="tibetan">
-			<div class="sleeve sleeve-large" data-sleeve="tibetan">
-				<img class="art" src="covers/tibetan.svg" alt="" width="1000" height="1000" loading="lazy">
-				<span class="hook"><span lang="bo">བཀྲ་ཤིས་བདེ་ལེགས</span></span>
-			</div>
-			<div class="notes">
-				<h2>Tibetan Translate</h2>
-				<p class="status">In progress</p>
-				<p class="lede">The goal is to type or speak in English or Tibetan, get a translation, and hear it read aloud. Tibetan has very little training data, so this stage is about measuring open models and fixing what they get wrong.</p>
-				<dl>
-					<dt>Tibetan to English</dt>
-					<dd>chrF score up from 48.5 to 58.6</dd>
-					<dt>English to Tibetan</dt>
-					<dd>chrF score up from 36.3 to 38.5</dd>
-					<dt>Spoken round trip</dt>
-					<dd>Character errors down from 47% to 42%</dd>
-					<dt>How far to trust that</dt>
-					<dd>These are early numbers from 48 draft sentences that a fluent speaker hasn't checked yet.</dd>
-					<dt>Built with</dt>
-					<dd>Python, PyTorch, NLLB-200, MMS</dd>
-				</dl>
-				<p class="closed">The code is private for now. I'm happy to walk through it.</p>
-				<p class="plate" data-commits="tibetan">Cover: 8 commits, one bar each, taller where more lines changed.</p>
-			</div>
-		</article>
-
-		<article class="spread mid" id="beygarage" data-wall="beygarage">
-			<div class="sleeve sleeve-large" data-sleeve="beygarage">
-				<img class="art" src="covers/beygarage.svg" alt="" width="1000" height="1000" loading="lazy">
-				<span class="hook">Every part. Every combo, scored against the meta.</span>
-			</div>
-			<div class="notes">
-				<h2>BeyGarage</h2>
-				<p class="status">Not public yet</p>
-				<p class="lede">A companion site for Beyblade X players. Look up any part, build a combo and see how it scores against recent tournament results, then track what you own.</p>
-				<dl>
-					<dt>What's hard about it</dt>
-					<dd>Turning scattered sources into one set of data: a parts wiki, official product pages, event schedules and store stock, all refreshed on a schedule.</dd>
-					<dt>Built with</dt>
-					<dd>React, Vite, Express, Postgres, Ollama</dd>
-					<dt>Tests</dt>
-					<dd>Over 100 automated tests</dd>
-				</dl>
-				<p class="closed">The code is private for now. I'm happy to walk through it. Fan-made, and not affiliated with Takara Tomy or Hasbro.</p>
-				<p class="plate" data-commits="beygarage">Cover: 142 commits, one spoke each, longer where more lines changed.</p>
-			</div>
-		</article>
-
-		<article class="spread mid" id="job-dashboard" data-wall="job-dashboard">
-			<div class="sleeve sleeve-large" data-sleeve="job-dashboard">
-				<img class="art" src="covers/job-dashboard.svg" alt="" width="1000" height="1000" loading="lazy">
-				<span class="hook">Job postings, ranked against my resume.</span>
-			</div>
-			<div class="notes">
-				<h2>Job Dashboard</h2>
-				<p class="status">Runs on my PC</p>
-				<p class="lede">It pulls postings from public job feeds, removes duplicates, and scores each one against my resume with the reasons shown. A browser extension fills in forms for me to review, and I submit every application myself.</p>
-				<ul class="actions">
-					<li><a href="https://raagna.github.io/jobdashboard-site/">About this project</a></li>
-				</ul>
-				<dl>
-					<dt>What's hard about it</dt>
-					<dd>Making four different feeds look like one kind of job, then keeping a score honest enough to act on.</dd>
-					<dt>Built with</dt>
-					<dd>React, Vite, Node, Postgres, a browser extension</dd>
-					<dt>Tests</dt>
-					<dd>Over 240 automated tests</dd>
-				</dl>
-				<p class="plate" data-commits="job-dashboard">Cover: 54 commits, one bar each, sorted biggest first.</p>
-			</div>
-		</article>
-
-		<article class="spread minor" id="mobile-game" data-wall="mobile-game">
-			<div class="sleeve sleeve-large" data-sleeve="mobile-game">
-				<img class="art" src="covers/mobile-game.svg" alt="" width="1000" height="1000" loading="lazy">
-				<span class="hook">A solo game, from React Native to Spring Boot.</span>
-			</div>
-			<div class="notes">
-				<h2>Mobile Game</h2>
-				<p class="status">Source only</p>
-				<p class="lede">A solo project from 2025 to practise building a mobile app from end to end, with a React Native front end and a Spring Boot back end. It isn't hosted anywhere, so the source is the way to see it.</p>
-				<ul class="actions">
-					<li><a href="https://github.com/Raagna/MobileGame">Source on GitHub</a></li>
-				</ul>
-				<dl>
-					<dt>Built with</dt>
-					<dd>React Native, Expo, Reanimated, Spring Boot</dd>
-				</dl>
-				<p class="plate" data-commits="mobile-game">Cover: 26 commits, one square each.</p>
-			</div>
-		</article>
+		</section>
 
 		<section class="experience" id="experience">
 			<h2>Experience</h2>
-			<ol class="roles">
+			<ol>
 				<li>
-					<h3>Bachelor of Computer Science, Carleton University</h3>
+					<div>
+						<h3>Bachelor of Computer Science, Carleton University</h3>
+						<p>Artificial Intelligence stream.</p>
+					</div>
 					<p class="when">April 2025</p>
-					<p>Artificial Intelligence stream.</p>
 				</li>
 				<li>
-					<h3>AI Engineer Intern, Radical AI</h3>
+					<div>
+						<h3>AI Engineer Intern, Radical AI</h3>
+						<p>Built and deployed AI applications on the OpenAI Assistants API and Google Gemini, prepared the data behind them, and refined prompts.</p>
+					</div>
 					<p class="when">May to August 2024, remote</p>
-					<p>Built and deployed AI applications on the OpenAI Assistants API and Google Gemini, prepared the data behind them, and refined prompts.</p>
 				</li>
 				<li>
-					<h3>Mentor, CAIS Hacks</h3>
+					<div>
+						<h3>Mentor, CAIS Hacks</h3>
+						<p>Organized lessons on TensorFlow, NLP, computer vision and Pandas, and mentored students through the hackathon.</p>
+					</div>
 					<p class="when">March 2023</p>
-					<p>Organized lessons on TensorFlow, NLP, computer vision and Pandas, and mentored students through the hackathon.</p>
 				</li>
 				<li>
-					<h3>Webmaster, Carleton AI Society</h3>
+					<div>
+						<h3>Webmaster, Carleton AI Society</h3>
+						<p>Maintained the society's website: plugins, performance, security and fixes.</p>
+					</div>
 					<p class="when">Joined September 2022</p>
-					<p>Maintained the society's website: plugins, performance, security and fixes.</p>
 				</li>
 				<li>
-					<h3>GeekPeek 1, Canadian Centre for Cyber Security</h3>
+					<div>
+						<h3>GeekPeek 1, Canadian Centre for Cyber Security</h3>
+						<p>Worked in a team on a threat intelligence tool that identifies malware by its behaviour, and built part of its front end.</p>
+					</div>
 					<p class="when">December 2021</p>
-					<p>Worked in a team on a threat intelligence tool that identifies malware by its behaviour, and built part of its front end.</p>
 				</li>
 			</ol>
-			<p class="stack">I work mostly in JavaScript, Python, SQL and Java, and I've also used C and C++.</p>
+			<p class="skills">I work mostly in JavaScript, Python, SQL and Java, and I've also used C and C++.</p>
 		</section>
 	</main>
 
-	<footer class="close">
+	<footer class="contact" id="contact">
 		<h2>Hiring, or want a walkthrough?</h2>
-		<p><a class="mail" href="mailto:rabten.tt@gmail.com">rabten.tt@gmail.com</a></p>
-		<ul class="contact-links">
-			<li><a href="https://github.com/Raagna">GitHub</a></li>
-			<li><a href="https://www.linkedin.com/in/rabten-tsering/">LinkedIn</a></li>
-			<li><a href="#top">Back to the crate</a></li>
-		</ul>
-		<p class="colophon">Each cover is drawn from that project's real commit history. Set in Archivo and Noto Serif Tibetan.</p>
+		<p class="address"><a href="mailto:rabten.tt@gmail.com">rabten.tt@gmail.com</a></p>
+		<p class="elsewhere">
+			<a href="https://github.com/Raagna">GitHub</a>
+			<a href="https://www.linkedin.com/in/rabten-tsering/">LinkedIn</a>
+		</p>
+		<p class="credit">Set in Public Sans.</p>
 	</footer>
-
-	<script src="site.js" defer></script>
 </body>
 </html>
